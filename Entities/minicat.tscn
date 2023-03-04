@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://wl5ytoweamr7"]
+
+[ext_resource type="Texture2D" uid="uid://r57h4m6737l8" path="res://Images/minicat.png" id="1_8cl3f"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0eb34"]
+bounce = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nmkgx"]
+atlas = ExtResource("1_8cl3f")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6jxwd"]
+atlas = ExtResource("1_8cl3f")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h61eo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nmkgx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6jxwd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b6het"]
+
+[node name="RigidBody2D" type="RigidBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_0eb34")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -11)
+sprite_frames = SubResource("SpriteFrames_h61eo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_b6het")
