@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://d3sw8uxres600"]
+[gd_scene load_steps=5 format=3 uid="uid://d3sw8uxres600"]
 
+[ext_resource type="PackedScene" uid="uid://bx8lltqp8hwmf" path="res://UI/Key.tscn" id="1_0r00d"]
 [ext_resource type="Texture2D" uid="uid://dycm6inr56wqq" path="res://Images/minifatduck.png" id="1_awu6k"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_low3u"]
@@ -41,6 +42,10 @@ offset_bottom = 142.0
 grow_horizontal = 2
 size_flags_stretch_ratio = 0.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_low3u")
+
+[node name="Key" parent="Dialogue" instance=ExtResource("1_0r00d")]
+position = Vector2(483.5, 100)
+key = "A"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Dialogue"]
 layout_mode = 2

@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://c7ry4wda4b13u"]
+[gd_scene load_steps=13 format=3 uid="uid://c7ry4wda4b13u"]
 
 [ext_resource type="Script" path="res://Entities/Character.gd" id="1_3g8u8"]
 [ext_resource type="Texture2D" uid="uid://bb1sn4bt1i5u0" path="res://Images/Character.png" id="1_igwot"]
+[ext_resource type="AudioStream" uid="uid://blf8fvuvnxl0t" path="res://Sounds/fx_stone_footsteps.ogg" id="3_8sw5n"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cepne"]
 atlas = ExtResource("1_igwot")
@@ -91,3 +92,7 @@ frame_progress = 0.578471
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1.5, 0)
 shape = SubResource("RectangleShape2D_5xbeq")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_8sw5n")
+autoplay = true

@@ -43,10 +43,12 @@ func _physics_process(delta):
 	if input.x == 0:
 		sprite.play("IDLE");
 		apply_friction();
+		stopWalkAudio();
 	else:
 		sprite.play("WALK");
 		apply_acceleration(input.x);
-	
+		playWalkAudio();
+		
 	if (!is_on_floor()):
 		sprite.play("JUMP");
 	elif input.x == 0:
@@ -75,6 +77,13 @@ func _physics_process(delta):
 	if (shouldApplyGravity):
 		apply_gravity()
 	move_and_slide();
+
+func playWalkAudio():
+	if (!$AudioStreamPlayer.playing):
+		$AudioStreamPlayer.play(0);
+		
+func stopWalkAudio():
+	$AudioStreamPlayer.stop();
 
 func apply_gravity():
 	velocity.y += GRAVITY;
