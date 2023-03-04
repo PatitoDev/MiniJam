@@ -1,13 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://dpjw3upsfvwjd"]
+[gd_scene load_steps=13 format=3 uid="uid://dpjw3upsfvwjd"]
 
 [ext_resource type="Script" path="res://Game.gd" id="1_my1t2"]
+[ext_resource type="Texture2D" uid="uid://dqcwklm3pj1hw" path="res://World/images/initalscreen.png" id="2_ckbm6"]
 [ext_resource type="Texture2D" uid="uid://cstxrywt28fry" path="res://Images/tileset.png" id="2_dqxty"]
-[ext_resource type="Texture2D" uid="uid://djfw5vafklk8c" path="res://Images/minifatduck.png" id="3_jqf0w"]
 [ext_resource type="PackedScene" uid="uid://c7ry4wda4b13u" path="res://Entities/Character.tscn" id="3_pt0dx"]
 [ext_resource type="Texture2D" uid="uid://wslxj0336fs5" path="res://Images/patamanmini.png" id="4_usaey"]
 [ext_resource type="Texture2D" uid="uid://7kbue1q3duw3" path="res://Images/pixil-frame-0_2.png" id="6_krvou"]
+[ext_resource type="PackedScene" uid="uid://d3sw8uxres600" path="res://UI/Dialogue.tscn" id="7_vkf6t"]
 [ext_resource type="Texture2D" uid="uid://r57h4m6737l8" path="res://Images/minicat.png" id="7_xlm1e"]
-[ext_resource type="PackedScene" uid="uid://wl5ytoweamr7" path="res://Entities/minicat.tscn" id="8_wn4fv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0hdl2"]
 texture = ExtResource("2_dqxty")
@@ -150,19 +150,30 @@ tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_0hdl2")
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xnqxl"]
+load_path = "res://.godot/imported/minifatduck.png-9e1480c341fd593e8320318b857fc3e3.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fd25t"]
+size = Vector2(767, 20)
+
 [node name="Node2D" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_my1t2")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -26.0
-offset_top = -20.0
-offset_right = 669.0
-offset_bottom = 391.0
+[node name="Initalscreen" type="Sprite2D" parent="."]
+position = Vector2(320, 180)
+texture = ExtResource("2_ckbm6")
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_left = 953.0
+offset_top = -495.0
+offset_right = 1648.0
+offset_bottom = -84.0
 color = Color(0.301961, 0.137255, 0.290196, 1)
 
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1
+position = Vector2(775, 212)
 tile_set = SubResource("TileSet_sggff")
 cell_quadrant_size = 32
 format = 2
@@ -171,7 +182,7 @@ layer_0/tile_data = PackedInt32Array(-1, 65536, 1, 65535, 65536, 1, 131071, 6553
 [node name="Minifatduck" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(84, 110)
-texture = ExtResource("3_jqf0w")
+texture = SubResource("CompressedTexture2D_xnqxl")
 
 [node name="Patamanmini" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -182,7 +193,17 @@ texture = ExtResource("4_usaey")
 position = Vector2(162, 114)
 
 [node name="Camera2D" type="Camera2D" parent="Character"]
-position = Vector2(0, -1)
+position = Vector2(-6, -106)
+
+[node name="orange" type="ColorRect" parent="Character/Camera2D"]
+z_index = -1
+offset_left = -334.0
+offset_top = -189.0
+offset_right = 361.0
+offset_bottom = 222.0
+color = Color(0.952941, 0.705882, 0.52549, 1)
+
+[node name="Dialogue" parent="Character/Camera2D" instance=ExtResource("7_vkf6t")]
 
 [node name="Pixil-frame-02" type="Sprite2D" parent="."]
 position = Vector2(123, 58)
@@ -192,17 +213,8 @@ texture = ExtResource("6_krvou")
 position = Vector2(55, 60)
 texture = ExtResource("7_xlm1e")
 
-[node name="RigidBody2D" parent="." instance=ExtResource("8_wn4fv")]
-position = Vector2(251, 138)
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
 
-[node name="RigidBody2D2" parent="." instance=ExtResource("8_wn4fv")]
-position = Vector2(285, 201)
-
-[node name="RigidBody2D3" parent="." instance=ExtResource("8_wn4fv")]
-position = Vector2(303, 124)
-
-[node name="RigidBody2D4" parent="." instance=ExtResource("8_wn4fv")]
-position = Vector2(388, 143)
-
-[node name="RigidBody2D5" parent="." instance=ExtResource("8_wn4fv")]
-position = Vector2(280, 145)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(390.5, 351)
+shape = SubResource("RectangleShape2D_fd25t")

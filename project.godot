@@ -13,7 +13,6 @@ config_version=5
 config/name="MiniJam"
 run/main_scene="res://Game.tscn"
 config/features=PackedStringArray("4.0", "GL Compatibility")
-boot_splash/bg_color=Color(0.301961, 0.137255, 0.290196, 1)
 config/icon="res://icon.svg"
 
 [display]

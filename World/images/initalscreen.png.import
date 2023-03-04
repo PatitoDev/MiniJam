@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dycm6inr56wqq"
-path="res://.godot/imported/minifatduck.png-9e1480c341fd593e8320318b857fc3e3.ctex"
+uid="uid://dqcwklm3pj1hw"
+path="res://.godot/imported/initalscreen.png-5e704b5fe78c79dca8c807ca86418cc4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/minifatduck.png"
-dest_files=["res://.godot/imported/minifatduck.png-9e1480c341fd593e8320318b857fc3e3.ctex"]
+source_file="res://World/images/initalscreen.png"
+dest_files=["res://.godot/imported/initalscreen.png-5e704b5fe78c79dca8c807ca86418cc4.ctex"]
 
 [params]
 
