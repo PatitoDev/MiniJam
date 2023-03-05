@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://drc7vgdgp4ugk"]
+
+[ext_resource type="Script" path="res://World/TransitionNode/TransitionNode.gd" id="1_oxejo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cxhkq"]
+size = Vector2(77, 123)
+
+[node name="TransitionNode" type="Area2D"]
+script = ExtResource("1_oxejo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_cxhkq")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

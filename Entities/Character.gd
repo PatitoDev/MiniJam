@@ -1,5 +1,9 @@
 extends CharacterBody2D
 
+class_name Character
+
+var currentInteractionItem = null;
+
 enum DIRECTION {
 	LEFT,
 	RIGHT
@@ -7,15 +11,17 @@ enum DIRECTION {
 
 var JUMP_FORCE = -200
 var JUMP_RELEASE_FORCE = -200
-var MAX_SPEED = 150
-var ACCELERATION = 25
+var MAX_SPEED = 100
+var ACCELERATION = 10
 var FRICTION = 10
 var GRAVITY = 10
 var ADDITIONAL_FALL_GRAVITY = 4
 
 const SPEED = 100.0
 const JUMP_VELOCITY = -250.0
-@onready var sprite = $AnimatedSprite2D;
+@onready var catSprite = $Sprite/Cat;
+@onready var animation = $Sprite/AnimationTree
+@onready var stateMachine = animation["parameters/playback"];
 
 const WALL_JUMP_BOOST = 250;
 var direction = DIRECTION.RIGHT;
@@ -25,6 +31,9 @@ var jumpCount = 0;
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity");
 
 func _physics_process(delta):
+	if (Input.is_action_just_pressed("interact")):
+		onInteractionPressed();
+	
 	var shouldApplyGravity = true;
 	var input = Vector2.ZERO
 	input.x = Input.get_axis("ui_left", "ui_right");
@@ -34,32 +43,33 @@ func _physics_process(delta):
 		input.x = 0;
 	
 	if input.x > 0:
-		sprite.scale.x = 1;
+		catSprite.scale.x = 1;
 		direction = DIRECTION.RIGHT;
 	elif input.x < 0:
 		direction = DIRECTION.LEFT;
-		sprite.scale.x = -1;
+		catSprite.scale.x = -1;
 	
 	if input.x == 0:
-		sprite.play("IDLE");
+		stateMachine.travel("IDLE");
 		apply_friction();
 		stopWalkAudio();
 	else:
-		sprite.play("WALK");
+		stateMachine.travel("Walk");
 		apply_acceleration(input.x);
 		playWalkAudio();
 		
 	if (!is_on_floor()):
-		sprite.play("JUMP");
+		#catSprite.play("JUMP");
+		pass
 	elif input.x == 0:
-		sprite.play("IDLE");
+		stateMachine.travel("IDLE");
 	
 	if is_on_floor():
 		if Input.is_action_just_pressed("ui_accept"):
 			velocity.y = JUMP_FORCE;
 	else:
 		if (is_on_wall()):
-			sprite.play("WALL_JUMP");
+			#catSprite.play("WALL_JUMP");
 			if Input.is_action_just_pressed("ui_accept"):
 				velocity.y = - WALL_JUMP_BOOST;
 				if direction == DIRECTION.LEFT:
@@ -93,3 +103,28 @@ func apply_friction():
 	
 func apply_acceleration(amount):
 	velocity.x = move_toward(velocity.x, MAX_SPEED * amount, ACCELERATION);
+
+func onInteractionPressed():
+	if (currentInteractionItem is DialogueInteractionZone &&
+		!UI.isDialogueShowing):
+		$Key.hideKey();
+		var character = currentInteractionItem.character;
+		var text = currentInteractionItem.dialogueText;
+		UI.showDialogue(text, character);
+		return;
+	
+	if (currentInteractionItem is DialogueInteractionZone &&
+		UI.isDialogueShowing):
+			UI.hideDialogue();
+			$Key.showKey();
+
+func _on_collision_area_area_entered(area: Area2D):
+	if (area.is_in_group('InteractionZone')):
+		$Key.showKey();
+		currentInteractionItem = area.get_parent();
+
+func _on_collision_area_area_exited(area):
+	if (area.is_in_group('InteractionZone') && currentInteractionItem != null):
+		$Key.hideKey();
+		currentInteractionItem = null;
+		UI.hideDialogue();

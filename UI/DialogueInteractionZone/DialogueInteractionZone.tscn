@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bksci20xj0h40"]
+
+[ext_resource type="Script" path="res://UI/DialogueInteractionZone/DialogueInteractionZone.gd" id="1_m354q"]
+[ext_resource type="PackedScene" uid="uid://cb1y4cud6q5b2" path="res://BaseElements/InteractionZone.tscn" id="2_3wvo8"]
+
+[node name="DialogueInteractionZone" type="Node2D"]
+script = ExtResource("1_m354q")
+
+[node name="InteractionZone" parent="." instance=ExtResource("2_3wvo8")]
