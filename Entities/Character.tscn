@@ -1,10 +1,21 @@
-[gd_scene load_steps=47 format=3 uid="uid://c7ry4wda4b13u"]
+[gd_scene load_steps=71 format=3 uid="uid://c7ry4wda4b13u"]
 
 [ext_resource type="Script" path="res://Entities/Character.gd" id="1_3g8u8"]
 [ext_resource type="Texture2D" uid="uid://bb1sn4bt1i5u0" path="res://Images/Character.png" id="1_igwot"]
 [ext_resource type="AudioStream" uid="uid://blf8fvuvnxl0t" path="res://Sounds/fx_stone_footsteps.ogg" id="3_8sw5n"]
 [ext_resource type="PackedScene" uid="uid://bx8lltqp8hwmf" path="res://UI/Key.tscn" id="4_ugpsr"]
 [ext_resource type="Texture2D" uid="uid://b1573w8214eif" path="res://Images/catsprite.png" id="5_hdccl"]
+[ext_resource type="Texture2D" uid="uid://cd4iwjcq3gpn0" path="res://Images/particle_square.png" id="6_djctv"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wrg7g"]
+emission_shape = 1
+emission_sphere_radius = 3.0
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.01
+scale_max = 0.15
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q3bsn"]
 atlas = ExtResource("1_igwot")
@@ -231,14 +242,26 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v7nvi"]
+animation = &"Fall"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mabg5"]
 animation = &"IDLE"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wudn6"]
+animation = &"Jump"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lgm53"]
 animation = &"PreWalk"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4m0tn"]
 animation = &"Walk"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pvywx"]
+animation = &"WallGrab"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_x4pxv"]
+animation = &"WallWalk"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_53h6e"]
 
@@ -247,67 +270,54 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7tly8"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_smmoq"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wyawm"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_itbf7"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tlkht"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ddhjk"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pnjiu"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_feg8v"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hjy08"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xw612"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pxgyl"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vx0hv"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pucq3"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sktq4"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_e87or"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_yfwj2"]
+states/Fall/node = SubResource("AnimationNodeAnimation_v7nvi")
+states/Fall/position = Vector2(688.667, 185)
 states/IDLE/node = SubResource("AnimationNodeAnimation_mabg5")
-states/IDLE/position = Vector2(208.667, 181.333)
+states/IDLE/position = Vector2(252, 201.333)
+states/Jump/node = SubResource("AnimationNodeAnimation_wudn6")
+states/Jump/position = Vector2(240, 0.999996)
 states/PreWalk/node = SubResource("AnimationNodeAnimation_lgm53")
-states/PreWalk/position = Vector2(486.667, 307.333)
-states/Start/position = Vector2(250.667, 28.7407)
+states/PreWalk/position = Vector2(-25.333, 314.222)
+states/Start/position = Vector2(-55.9996, 39.4074)
 states/Walk/node = SubResource("AnimationNodeAnimation_4m0tn")
-states/Walk/position = Vector2(539.333, 157.333)
-transitions = ["IDLE", "PreWalk", SubResource("AnimationNodeStateMachineTransition_53h6e"), "PreWalk", "Walk", SubResource("AnimationNodeStateMachineTransition_tbqw1"), "Walk", "IDLE", SubResource("AnimationNodeStateMachineTransition_7tly8")]
-graph_offset = Vector2(-195, -113)
+states/Walk/position = Vector2(734.666, 276.666)
+states/WallGrab/node = SubResource("AnimationNodeAnimation_pvywx")
+states/WallGrab/position = Vector2(679.556, -49)
+states/WallWalk/node = SubResource("AnimationNodeAnimation_x4pxv")
+states/WallWalk/position = Vector2(373.333, 421.667)
+transitions = ["IDLE", "PreWalk", SubResource("AnimationNodeStateMachineTransition_53h6e"), "PreWalk", "Walk", SubResource("AnimationNodeStateMachineTransition_tbqw1"), "Walk", "IDLE", SubResource("AnimationNodeStateMachineTransition_7tly8"), "IDLE", "WallWalk", SubResource("AnimationNodeStateMachineTransition_smmoq"), "IDLE", "WallGrab", SubResource("AnimationNodeStateMachineTransition_wyawm"), "IDLE", "Fall", SubResource("AnimationNodeStateMachineTransition_itbf7"), "IDLE", "Jump", SubResource("AnimationNodeStateMachineTransition_tlkht"), "Jump", "IDLE", SubResource("AnimationNodeStateMachineTransition_ddhjk"), "Fall", "IDLE", SubResource("AnimationNodeStateMachineTransition_pnjiu"), "WallWalk", "IDLE", SubResource("AnimationNodeStateMachineTransition_feg8v"), "WallGrab", "IDLE", SubResource("AnimationNodeStateMachineTransition_hjy08"), "Fall", "WallGrab", SubResource("AnimationNodeStateMachineTransition_xw612"), "WallGrab", "Fall", SubResource("AnimationNodeStateMachineTransition_pxgyl"), "Jump", "WallGrab", SubResource("AnimationNodeStateMachineTransition_vx0hv"), "WallGrab", "Jump", SubResource("AnimationNodeStateMachineTransition_pucq3"), "WallGrab", "WallWalk", SubResource("AnimationNodeStateMachineTransition_sktq4"), "WallWalk", "WallGrab", SubResource("AnimationNodeStateMachineTransition_e87or")]
+graph_offset = Vector2(-318, -103)
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_3fcy8"]
-
-[sub_resource type="Animation" id="Animation_jlp2g"]
-resource_name = "Walk"
-length = 0.2
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [1, 2]
-}
-
-[sub_resource type="Animation" id="Animation_fkip2"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-
-[sub_resource type="Animation" id="Animation_6tfei"]
-resource_name = "PreWalk"
-length = 0.3
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0, 0]
-}
 
 [sub_resource type="Animation" id="Animation_c8sdl"]
 resource_name = "IDLE"
@@ -326,22 +336,158 @@ tracks/0/keys = {
 "values": [12, 13]
 }
 
+[sub_resource type="Animation" id="Animation_6tfei"]
+resource_name = "PreWalk"
+length = 0.1
+loop_mode = 1
+step = 0.005
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 0]
+}
+
+[sub_resource type="Animation" id="Animation_fkip2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_jlp2g"]
+resource_name = "Walk"
+length = 0.2
+loop_mode = 1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.07, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_lwuu1"]
+resource_name = "Jump"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [4, 4]
+}
+
+[sub_resource type="Animation" id="Animation_iygxm"]
+resource_name = "Fall"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [5, 5]
+}
+
+[sub_resource type="Animation" id="Animation_ahpg0"]
+resource_name = "WallGrab"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [8, 8]
+}
+
+[sub_resource type="Animation" id="Animation_i53fh"]
+resource_name = "WallWalk"
+length = 0.4
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [8, 9]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xiohw"]
 _data = {
+"Fall": SubResource("Animation_iygxm"),
 "IDLE": SubResource("Animation_c8sdl"),
+"Jump": SubResource("Animation_lwuu1"),
 "PreWalk": SubResource("Animation_6tfei"),
 "RESET": SubResource("Animation_fkip2"),
-"Walk": SubResource("Animation_jlp2g")
+"Walk": SubResource("Animation_jlp2g"),
+"WallGrab": SubResource("Animation_ahpg0"),
+"WallWalk": SubResource("Animation_i53fh")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5xbeq"]
-size = Vector2(27, 28)
+size = Vector2(32, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iuk7m"]
 size = Vector2(27, 28)
 
 [node name="Character" type="CharacterBody2D"]
 script = ExtResource("1_3g8u8")
+
+[node name="ParticleContainer" type="Node2D" parent="."]
+
+[node name="Particles" type="GPUParticles2D" parent="ParticleContainer"]
+modulate = Color(0.831373, 0.443137, 0.364706, 1)
+texture_filter = 1
+position = Vector2(14, 8)
+emitting = false
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_wrg7g")
+texture = ExtResource("6_djctv")
+lifetime = 0.2
+explosiveness = 0.16
+randomness = 0.47
 
 [node name="Key" parent="." instance=ExtResource("4_ugpsr")]
 position = Vector2(-1, -33)
@@ -387,13 +533,13 @@ vframes = 6
 frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(-1.5, 0)
+position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_5xbeq")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="SfxPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_8sw5n")
 autoplay = true
+bus = &"SFX"
 
 [node name="CollisionArea" type="Area2D" parent="."]
 
