@@ -1,6 +1,6 @@
 extends Node
 
-var totalCats = 50;
+var totalCats = 6;
 var catsFreed = 0;
 
 func setCatFree():

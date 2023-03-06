@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://by0pcyw0jt648"]
+[gd_scene load_steps=10 format=3 uid="uid://by0pcyw0jt648"]
 
 [ext_resource type="Script" path="res://BaseElements/TileBase.gd" id="1_5hh2s"]
 [ext_resource type="Texture2D" uid="uid://bcnel0ia4m8w6" path="res://World/Levels/img/ background-white.png" id="2_nufr3"]
 [ext_resource type="Texture2D" uid="uid://073uysbi8j2s" path="res://World/Levels/img/bg_mountains_white.png" id="3_p8f2d"]
 [ext_resource type="Texture2D" uid="uid://bsurtwql5kbl8" path="res://Images/tilesetnew.png" id="4_qks3f"]
 [ext_resource type="PackedScene" uid="uid://drc7vgdgp4ugk" path="res://World/TransitionNode/TransitionNode.tscn" id="5_cypah"]
+[ext_resource type="PackedScene" uid="uid://c6qa3wvmsu7uq" path="res://Entities/CatJail/CatJail.tscn" id="6_kvlet"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t7tjf"]
 texture = ExtResource("4_qks3f")
@@ -218,12 +219,12 @@ offset_bottom = 180.0
 color = Color(0.894118, 0.858824, 0.839216, 1)
 
 [node name="Background-white" type="Sprite2D" parent="TileMap"]
+visible = false
 texture_filter = 1
 position = Vector2(160, 90)
 texture = ExtResource("2_nufr3")
 
 [node name="BgMountainsWhite" type="Sprite2D" parent="TileMap"]
-visible = false
 texture_filter = 1
 position = Vector2(160, 90)
 texture = ExtResource("3_p8f2d")
@@ -232,7 +233,7 @@ texture = ExtResource("3_p8f2d")
 texture_filter = 1
 tile_set = SubResource("TileSet_qrydk")
 format = 2
-layer_0/tile_data = PackedInt32Array(655360, 65536, 0, 655361, 65536, 0, 655362, 65536, 0, 655363, 65536, 0, 655364, 65536, 0, 655365, 65536, 0, 655369, 65536, 0, 655371, 65536, 0, 655372, 65536, 0, 655373, 65536, 0, 655374, 65536, 0, 655375, 65536, 0, 655376, 65536, 0, 655377, 65536, 0, 655378, 65536, 0, 655379, 65536, 0)
+layer_0/tile_data = PackedInt32Array(458754, 65536, 0, 458756, 327680, 0, 458753, 262144, 0, 458755, 65536, 0, 524292, 327680, 1, 589828, 327680, 1, 655364, 327680, 1, 720900, 327680, 1, 524289, 262144, 1, 589825, 65536, 0, 655361, 65536, 1, 720897, 65536, 1, 524290, 65536, 1, 524291, 65536, 1, 589827, 65536, 1, 655363, 65536, 1, 720899, 65536, 1, 720898, 131072, 1, 655362, 131072, 1, 589826, 131072, 0, 262151, 0, 0, 327687, 0, 1, 393223, 0, 2, 393225, 131072, 2, 262153, 131072, 0, 262152, 65536, 0, 327689, 131072, 1, 393224, 65536, 2, 327688, 65536, 1, 720915, 0, 1, 655379, 0, 1, 589843, 0, 1, 524307, 0, 1, 458771, 0, 1, 131091, 0, 2, 65555, 0, 1, 19, 0, 1, 589839, 327680, 0, 589838, 262144, 0, 655374, 262144, 2, 655375, 327680, 2, 65551, 393216, 0, 131087, 393216, 1, 196623, 393216, 1, 393235, 0, 1, 327699, 0, 0, 262159, 393216, 2, 589824, 0, 0, 655360, 0, 1, 720896, 0, 1, 786432, 0, 1, 786433, 65536, 1, 786434, 131072, 1)
 
 [node name="DeathArea" type="Area2D" parent="TileMap"]
 
@@ -241,7 +242,17 @@ position = Vector2(160, 201.5)
 shape = SubResource("RectangleShape2D_3wceb")
 
 [node name="TransitionNode" parent="." instance=ExtResource("5_cypah")]
-position = Vector2(24, 134)
-songToPlay = 0
+position = Vector2(41, 100)
+scale = Vector2(2, 2)
+
+[node name="TransitionNode2" parent="." instance=ExtResource("5_cypah")]
+position = Vector2(289, 59)
+moveDirection = 0
+
+[node name="CatJail" parent="." instance=ExtResource("6_kvlet")]
+position = Vector2(240, 136)
+
+[node name="CatJail2" parent="." instance=ExtResource("6_kvlet")]
+position = Vector2(249, 8)
 
 [connection signal="body_entered" from="TileMap/DeathArea" to="TileMap" method="_on_death_area_body_entered" flags=18]

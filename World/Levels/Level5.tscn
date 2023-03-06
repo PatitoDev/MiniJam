@@ -1,15 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://cjk20kww6ghw4"]
+[gd_scene load_steps=10 format=3 uid="uid://b046j4i8jimgi"]
 
-[ext_resource type="Script" path="res://BaseElements/TileBase.gd" id="2_7v1up"]
-[ext_resource type="Texture2D" uid="uid://cx43dvkkrt51c" path="res://Images/celesteMap.png" id="2_xchqp"]
-[ext_resource type="Texture2D" uid="uid://bcnel0ia4m8w6" path="res://World/Levels/img/ background-white.png" id="3_qktyf"]
-[ext_resource type="Texture2D" uid="uid://073uysbi8j2s" path="res://World/Levels/img/bg_mountains_white.png" id="4_83u2t"]
-[ext_resource type="Texture2D" uid="uid://bsurtwql5kbl8" path="res://Images/tilesetnew.png" id="5_7m04i"]
-[ext_resource type="PackedScene" uid="uid://drc7vgdgp4ugk" path="res://World/TransitionNode/TransitionNode.tscn" id="6_1mgox"]
-[ext_resource type="PackedScene" uid="uid://c6qa3wvmsu7uq" path="res://Entities/CatJail/CatJail.tscn" id="7_3rxd4"]
+[ext_resource type="Script" path="res://BaseElements/TileBase.gd" id="1_88n06"]
+[ext_resource type="Texture2D" uid="uid://bcnel0ia4m8w6" path="res://World/Levels/img/ background-white.png" id="2_vhol8"]
+[ext_resource type="Texture2D" uid="uid://073uysbi8j2s" path="res://World/Levels/img/bg_mountains_white.png" id="3_6geys"]
+[ext_resource type="Texture2D" uid="uid://bsurtwql5kbl8" path="res://Images/tilesetnew.png" id="4_8uq86"]
+[ext_resource type="PackedScene" uid="uid://drc7vgdgp4ugk" path="res://World/TransitionNode/TransitionNode.tscn" id="5_tuiuy"]
+[ext_resource type="PackedScene" uid="uid://c6qa3wvmsu7uq" path="res://Entities/CatJail/CatJail.tscn" id="6_aqomn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t7tjf"]
-texture = ExtResource("5_7m04i")
+texture = ExtResource("4_8uq86")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -206,23 +205,13 @@ sources/0 = SubResource("TileSetAtlasSource_t7tjf")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3wceb"]
 size = Vector2(320.5, 35)
 
-[node name="Level1" type="Node2D"]
-
-[node name="CelesteMap" type="Sprite2D" parent="."]
-position = Vector2(160, 90)
-texture = ExtResource("2_xchqp")
-
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-offset_right = 640.0
-offset_bottom = 360.0
-color = Color(0.894118, 0.858824, 0.839216, 1)
+[node name="Level3" type="Node2D"]
 
 [node name="TileMap" type="Node2D" parent="."]
-script = ExtResource("2_7v1up")
+script = ExtResource("1_88n06")
 
 [node name="Spawn" type="Marker2D" parent="TileMap"]
-position = Vector2(271, 131)
+position = Vector2(25, 115)
 
 [node name="ColorRect" type="ColorRect" parent="TileMap"]
 offset_right = 320.0
@@ -232,38 +221,32 @@ color = Color(0.894118, 0.858824, 0.839216, 1)
 [node name="Background-white" type="Sprite2D" parent="TileMap"]
 texture_filter = 1
 position = Vector2(160, 90)
-texture = ExtResource("3_qktyf")
+texture = ExtResource("2_vhol8")
 
 [node name="BgMountainsWhite" type="Sprite2D" parent="TileMap"]
+visible = false
 texture_filter = 1
 position = Vector2(160, 90)
-texture = ExtResource("4_83u2t")
+texture = ExtResource("3_6geys")
 
 [node name="TileMap" type="TileMap" parent="TileMap"]
 texture_filter = 1
 tile_set = SubResource("TileSet_qrydk")
 format = 2
-layer_0/tile_data = PackedInt32Array(524292, 262144, 0, 589828, 262144, 2, 655364, 65536, 0, 524293, 65536, 0, 589829, 65536, 2, 655365, 131072, 0, 524294, 131072, 0, 589830, 131072, 2, 655370, 0, 0, 589835, 0, 0, 655371, 196608, 1, 589836, 65536, 0, 655372, 0, 1, 524301, 393216, 0, 589837, 65536, 1, 655373, 65536, 1, 589838, 327680, 0, 655374, 327680, 1, 393232, 262144, 0, 458768, 262144, 1, 524304, 262144, 1, 589840, 262144, 1, 655376, 262144, 1, 393233, 65536, 0, 458769, 65536, 1, 524305, 65536, 1, 589841, 196608, 0, 655377, 65536, 1, 393234, 327680, 0, 458770, 327680, 1, 524306, 327680, 1, 589842, 327680, 1, 655378, 327680, 1, 655363, 65536, 0, 655362, 65536, 0, 655361, 65536, 0, 655360, 65536, 0, 720896, 65536, 1, 720897, 65536, 1, 720898, 65536, 1, 720899, 65536, 1, 720900, 65536, 1, 720901, 131072, 1, 720909, 65536, 1, 720910, 327680, 1, 720906, 0, 1, 720907, 131072, 1, 720908, 0, 1, 720912, 262144, 1, 720914, 327680, 1, 720913, 65536, 1)
-
-[node name="TransitionNode" parent="TileMap" instance=ExtResource("6_1mgox")]
-position = Vector2(35, 116)
-scale = Vector2(2, 2)
-
-[node name="TransitionNode3" parent="TileMap" instance=ExtResource("6_1mgox")]
-position = Vector2(282, 65)
-scale = Vector2(2, 5.8)
-moveDirection = 0
+layer_0/tile_data = PackedInt32Array(655360, 65536, 4, 655361, 65536, 4, 655362, 65536, 4, 655363, 65536, 4, 655364, 65536, 4, 655365, 65536, 4, 655366, 65536, 4, 655367, 65536, 4, 655368, 65536, 4, 655369, 65536, 4, 655370, 65536, 4, 655371, 65536, 4, 655372, 65536, 4, 655373, 65536, 4, 655374, 65536, 4, 655375, 65536, 4, 655376, 65536, 4, 655377, 65536, 4, 655378, 65536, 4, 589843, 0, 5, 524307, 0, 5, 458771, 0, 5, 393235, 0, 5, 327699, 0, 5, 262163, 0, 5, 196627, 0, 5, 131091, 0, 5, 65555, 0, 5, 19, 196608, 4, 655379, 196608, 4, 720896, 65536, 5, 720897, 65536, 5, 720898, 65536, 5, 720899, 65536, 5, 720900, 65536, 5, 720901, 65536, 5, 720902, 65536, 5, 720903, 65536, 5, 720910, 65536, 5, 720911, 65536, 5, 720912, 65536, 5, 720913, 65536, 5, 720914, 65536, 5, 720915, 65536, 5, 720904, 65536, 5, 720905, 65536, 5, 720906, 65536, 5, 720907, 65536, 5, 720908, 65536, 5, 720909, 65536, 5, 18, 65536, 6, 17, 65536, 6, 16, 65536, 6, 15, 65536, 6, 11, 0, 6, 12, 65536, 6, 13, 65536, 6, 14, 65536, 6)
 
 [node name="DeathArea" type="Area2D" parent="TileMap"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap/DeathArea"]
-position = Vector2(160, 211)
+position = Vector2(160, 201.5)
 shape = SubResource("RectangleShape2D_3wceb")
 
-[node name="CatJail" parent="." instance=ExtResource("7_3rxd4")]
-position = Vector2(280, 88)
+[node name="TransitionNode" parent="." instance=ExtResource("5_tuiuy")]
+position = Vector2(43, 49)
+scale = Vector2(2, 5.12)
+songToPlay = 0
 
-[node name="CatJail2" parent="." instance=ExtResource("7_3rxd4")]
-position = Vector2(69, -39)
+[node name="CatJail2" parent="." instance=ExtResource("6_aqomn")]
+position = Vector2(285, 153)
 
 [connection signal="body_entered" from="TileMap/DeathArea" to="TileMap" method="_on_death_area_body_entered" flags=18]

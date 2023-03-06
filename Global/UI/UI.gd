@@ -27,8 +27,11 @@ func setMusic(song: SONGS):
 	var songToChange;
 	match song:
 		SONGS.CASTLE:
+			$Ambience.stop();
 			songToChange = castleBgMusic;
 		SONGS.FOREST:
+			if (!$Ambience.playing):
+				$Ambience.play();
 			songToChange = forestBgMusic;
 	
 	if ($Music.stream != songToChange):

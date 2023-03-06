@@ -1,11 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://dpjw3upsfvwjd"]
+[gd_scene load_steps=13 format=3 uid="uid://dpjw3upsfvwjd"]
 
 [ext_resource type="Script" path="res://Game.gd" id="1_my1t2"]
 [ext_resource type="PackedScene" uid="uid://by0pcyw0jt648" path="res://World/Levels/Level2.tscn" id="2_tw6yy"]
 [ext_resource type="PackedScene" uid="uid://bfrhm7r027vta" path="res://World/Levels/Home.tscn" id="2_yiwop"]
 [ext_resource type="PackedScene" uid="uid://cjk20kww6ghw4" path="res://World/Levels/Level1.tscn" id="3_ktyap"]
+[ext_resource type="PackedScene" uid="uid://bssdpn6cok5xj" path="res://World/Levels/Level3.tscn" id="4_u5wsp"]
 [ext_resource type="PackedScene" uid="uid://bksci20xj0h40" path="res://UI/DialogueInteractionZone/DialogueInteractionZone.tscn" id="9_4brfb"]
+[ext_resource type="PackedScene" uid="uid://bxhaluxvc0ys8" path="res://World/Levels/Level4.tscn" id="9_6lxqx"]
 [ext_resource type="AudioStream" uid="uid://c0t1n07a3upd7" path="res://Sounds/amb_forest.ogg" id="9_qc151"]
+[ext_resource type="PackedScene" uid="uid://b046j4i8jimgi" path="res://World/Levels/Level5.tscn" id="10_gjncx"]
 [ext_resource type="PackedScene" uid="uid://drc7vgdgp4ugk" path="res://World/TransitionNode/TransitionNode.tscn" id="10_nuxxp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fd25t"]
@@ -36,6 +39,15 @@ position = Vector2(960, 0)
 [node name="Level1" parent="." instance=ExtResource("3_ktyap")]
 position = Vector2(640, 0)
 
+[node name="Level3" parent="." instance=ExtResource("4_u5wsp")]
+position = Vector2(1280, 0)
+
+[node name="Level4" parent="." instance=ExtResource("9_6lxqx")]
+position = Vector2(1600, 0)
+
+[node name="Level5" parent="." instance=ExtResource("10_gjncx")]
+position = Vector2(1920, 0)
+
 [node name="Home" parent="." instance=ExtResource("2_yiwop")]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
@@ -43,6 +55,11 @@ position = Vector2(-11, 518)
 
 [node name="Wall" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(21, -356)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_fd25t")
+
+[node name="Wall2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(2646, -374)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_fd25t")
 
@@ -67,3 +84,10 @@ process_material = SubResource("ParticleProcessMaterial_eiqp4")
 lifetime = 4.0
 randomness = 0.37
 collision_base_size = 102.86
+
+[node name="Label" type="Label" parent="."]
+offset_left = 2324.0
+offset_top = 58.0
+offset_right = 2395.0
+offset_bottom = 84.0
+text = "YOU WIN"

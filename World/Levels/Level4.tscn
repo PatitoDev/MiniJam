@@ -1,15 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://cjk20kww6ghw4"]
+[gd_scene load_steps=10 format=3 uid="uid://bxhaluxvc0ys8"]
 
-[ext_resource type="Script" path="res://BaseElements/TileBase.gd" id="2_7v1up"]
-[ext_resource type="Texture2D" uid="uid://cx43dvkkrt51c" path="res://Images/celesteMap.png" id="2_xchqp"]
-[ext_resource type="Texture2D" uid="uid://bcnel0ia4m8w6" path="res://World/Levels/img/ background-white.png" id="3_qktyf"]
-[ext_resource type="Texture2D" uid="uid://073uysbi8j2s" path="res://World/Levels/img/bg_mountains_white.png" id="4_83u2t"]
-[ext_resource type="Texture2D" uid="uid://bsurtwql5kbl8" path="res://Images/tilesetnew.png" id="5_7m04i"]
-[ext_resource type="PackedScene" uid="uid://drc7vgdgp4ugk" path="res://World/TransitionNode/TransitionNode.tscn" id="6_1mgox"]
-[ext_resource type="PackedScene" uid="uid://c6qa3wvmsu7uq" path="res://Entities/CatJail/CatJail.tscn" id="7_3rxd4"]
+[ext_resource type="Script" path="res://BaseElements/TileBase.gd" id="1_05qhk"]
+[ext_resource type="Texture2D" uid="uid://bcnel0ia4m8w6" path="res://World/Levels/img/ background-white.png" id="2_k0xxi"]
+[ext_resource type="Texture2D" uid="uid://073uysbi8j2s" path="res://World/Levels/img/bg_mountains_white.png" id="3_u0g8k"]
+[ext_resource type="Texture2D" uid="uid://bsurtwql5kbl8" path="res://Images/tilesetnew.png" id="4_2agsc"]
+[ext_resource type="PackedScene" uid="uid://drc7vgdgp4ugk" path="res://World/TransitionNode/TransitionNode.tscn" id="5_h43dq"]
+[ext_resource type="PackedScene" uid="uid://c6qa3wvmsu7uq" path="res://Entities/CatJail/CatJail.tscn" id="6_fyudi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t7tjf"]
-texture = ExtResource("5_7m04i")
+texture = ExtResource("4_2agsc")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -204,25 +203,15 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_t7tjf")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3wceb"]
-size = Vector2(320.5, 35)
+size = Vector2(477.25, 35)
 
-[node name="Level1" type="Node2D"]
-
-[node name="CelesteMap" type="Sprite2D" parent="."]
-position = Vector2(160, 90)
-texture = ExtResource("2_xchqp")
-
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-offset_right = 640.0
-offset_bottom = 360.0
-color = Color(0.894118, 0.858824, 0.839216, 1)
+[node name="Level3" type="Node2D"]
 
 [node name="TileMap" type="Node2D" parent="."]
-script = ExtResource("2_7v1up")
+script = ExtResource("1_05qhk")
 
 [node name="Spawn" type="Marker2D" parent="TileMap"]
-position = Vector2(271, 131)
+position = Vector2(25, 115)
 
 [node name="ColorRect" type="ColorRect" parent="TileMap"]
 offset_right = 320.0
@@ -232,38 +221,34 @@ color = Color(0.894118, 0.858824, 0.839216, 1)
 [node name="Background-white" type="Sprite2D" parent="TileMap"]
 texture_filter = 1
 position = Vector2(160, 90)
-texture = ExtResource("3_qktyf")
+texture = ExtResource("2_k0xxi")
 
 [node name="BgMountainsWhite" type="Sprite2D" parent="TileMap"]
+visible = false
 texture_filter = 1
 position = Vector2(160, 90)
-texture = ExtResource("4_83u2t")
+texture = ExtResource("3_u0g8k")
 
 [node name="TileMap" type="TileMap" parent="TileMap"]
 texture_filter = 1
 tile_set = SubResource("TileSet_qrydk")
 format = 2
-layer_0/tile_data = PackedInt32Array(524292, 262144, 0, 589828, 262144, 2, 655364, 65536, 0, 524293, 65536, 0, 589829, 65536, 2, 655365, 131072, 0, 524294, 131072, 0, 589830, 131072, 2, 655370, 0, 0, 589835, 0, 0, 655371, 196608, 1, 589836, 65536, 0, 655372, 0, 1, 524301, 393216, 0, 589837, 65536, 1, 655373, 65536, 1, 589838, 327680, 0, 655374, 327680, 1, 393232, 262144, 0, 458768, 262144, 1, 524304, 262144, 1, 589840, 262144, 1, 655376, 262144, 1, 393233, 65536, 0, 458769, 65536, 1, 524305, 65536, 1, 589841, 196608, 0, 655377, 65536, 1, 393234, 327680, 0, 458770, 327680, 1, 524306, 327680, 1, 589842, 327680, 1, 655378, 327680, 1, 655363, 65536, 0, 655362, 65536, 0, 655361, 65536, 0, 655360, 65536, 0, 720896, 65536, 1, 720897, 65536, 1, 720898, 65536, 1, 720899, 65536, 1, 720900, 65536, 1, 720901, 131072, 1, 720909, 65536, 1, 720910, 327680, 1, 720906, 0, 1, 720907, 131072, 1, 720908, 0, 1, 720912, 262144, 1, 720914, 327680, 1, 720913, 65536, 1)
-
-[node name="TransitionNode" parent="TileMap" instance=ExtResource("6_1mgox")]
-position = Vector2(35, 116)
-scale = Vector2(2, 2)
-
-[node name="TransitionNode3" parent="TileMap" instance=ExtResource("6_1mgox")]
-position = Vector2(282, 65)
-scale = Vector2(2, 5.8)
-moveDirection = 0
+layer_0/tile_data = PackedInt32Array(655360, 196608, 4, 655361, 131072, 4, 1, 131072, 5, 0, 196608, 4, 65536, 65536, 6, 327680, 131072, 4, 393216, 131072, 5, 458752, 131072, 5, 524288, 131072, 5, 589824, 131072, 5, 720896, 196608, 4, 720897, 131072, 5, 786433, 196608, 4, 65537, 131072, 6, 10, 0, 5, 65546, 0, 5, 131082, 0, 5, 196618, 0, 6, 131083, 131072, 5, 65547, 131072, 5, 11, 131072, 5, -65525, 131072, 5, 196619, 131072, 6, 393227, 0, 4, 458763, 0, 6, 458764, 131072, 6, 393228, 131072, 4, 65551, 0, 4, 65552, 131072, 4, 131087, 0, 6, 131088, 131072, 6, 196613, 0, 4, 196614, 131072, 4, 262149, 0, 6, 262150, 131072, 6)
 
 [node name="DeathArea" type="Area2D" parent="TileMap"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap/DeathArea"]
-position = Vector2(160, 211)
+position = Vector2(238.375, 201.5)
 shape = SubResource("RectangleShape2D_3wceb")
 
-[node name="CatJail" parent="." instance=ExtResource("7_3rxd4")]
-position = Vector2(280, 88)
+[node name="TransitionNode" parent="." instance=ExtResource("5_h43dq")]
+position = Vector2(26, 52)
+songToPlay = 0
 
-[node name="CatJail2" parent="." instance=ExtResource("7_3rxd4")]
-position = Vector2(69, -39)
+[node name="CatJail" parent="." instance=ExtResource("6_fyudi")]
+position = Vector2(97, 41)
+
+[node name="CatJail2" parent="." instance=ExtResource("6_fyudi")]
+position = Vector2(192, 88)
 
 [connection signal="body_entered" from="TileMap/DeathArea" to="TileMap" method="_on_death_area_body_entered" flags=18]

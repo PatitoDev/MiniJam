@@ -5,7 +5,6 @@
 [ext_resource type="AudioStream" uid="uid://by05seo0imc0x" path="res://Sounds/fx_cage_opening.wav" id="3_64pij"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7kca7"]
-size = Vector2(50, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gm5ix"]
 
@@ -25,7 +24,7 @@ frame = 8
 position = Vector2(0, 8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionZone"]
-position = Vector2(0, -24)
+position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_7kca7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
