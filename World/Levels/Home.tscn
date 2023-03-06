@@ -1,0 +1,220 @@
+[gd_scene load_steps=19 format=3 uid="uid://bfrhm7r027vta"]
+
+[ext_resource type="Texture2D" uid="uid://bbiaw6n21pprj" path="res://World/Levels/img/mountainsSlide.png" id="1_yol1t"]
+[ext_resource type="PackedScene" uid="uid://c7ry4wda4b13u" path="res://Entities/Character.tscn" id="2_5iuj4"]
+[ext_resource type="Texture2D" uid="uid://dpwpurvotf8iq" path="res://World/Levels/img/mountainsSlide_tree.png" id="2_jvbrm"]
+[ext_resource type="PackedScene" uid="uid://drc7vgdgp4ugk" path="res://World/TransitionNode/TransitionNode.tscn" id="4_xx6or"]
+[ext_resource type="FontFile" uid="uid://d0kqltdkajq5n" path="res://Fonts/Pixellari.ttf" id="5_vavq4"]
+[ext_resource type="Texture2D" uid="uid://dycm6inr56wqq" path="res://Images/minifatduck.png" id="6_bg5li"]
+[ext_resource type="PackedScene" uid="uid://bksci20xj0h40" path="res://UI/DialogueInteractionZone/DialogueInteractionZone.tscn" id="7_0jups"]
+[ext_resource type="Texture2D" uid="uid://bu6flnd2u3i1x" path="res://Images/Ecay7ZSWkAUzm2d.jpg" id="8_gpcft"]
+[ext_resource type="Script" path="res://World/Levels/UI.gd" id="8_tefaw"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_o05jy"]
+font = ExtResource("5_vavq4")
+font_size = 8
+font_color = Color(0.937255, 0.921569, 0.917647, 1)
+outline_size = 3
+outline_color = Color(0.301961, 0.137255, 0.290196, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pgys5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pinaw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wdbob"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_va8b0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8el1a"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ht5ln"]
+font = ExtResource("5_vavq4")
+font_color = Color(0.301961, 0.137255, 0.290196, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_mnf4x"]
+font = ExtResource("5_vavq4")
+font_size = 8
+font_color = Color(0.301961, 0.137255, 0.290196, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_86ejh"]
+line_spacing = 1.0
+font = ExtResource("5_vavq4")
+font_size = 5
+font_color = Color(0.301961, 0.137255, 0.290196, 1)
+
+[node name="Home" type="Node2D"]
+
+[node name="MountainsSlide" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(320, 90)
+texture = ExtResource("1_yol1t")
+
+[node name="MountainsSlide3" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(320, 90)
+texture = ExtResource("1_yol1t")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(1, 137)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(0, 7)
+polygon = PackedVector2Array(-4, -9, 58, 2, 115, 3, 230, -1, 263, -3, 285, 5, 336, 3, 375, 6, 454, 4, 531, 16, 563, 17, 603, 18, 642, 15, 642, 22, 645, 47, 626, 81, 316, 72, 106, 70, -88, 61, -26, 3)
+
+[node name="Minifatduck" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(613, 140)
+texture = ExtResource("6_bg5li")
+
+[node name="Character" parent="." instance=ExtResource("2_5iuj4")]
+position = Vector2(55, 124)
+
+[node name="TransitionNode" parent="." instance=ExtResource("4_xx6or")]
+position = Vector2(291, 125)
+moveDirection = 0
+
+[node name="TransitionNode2" parent="." instance=ExtResource("4_xx6or")]
+position = Vector2(345, 125)
+
+[node name="Tree" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(320, 90)
+texture = ExtResource("2_jvbrm")
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+offset_left = 18.0
+offset_top = 12.0
+offset_right = 210.0
+offset_bottom = 50.0
+text = "Cat Jump 
+Very Fun Game"
+label_settings = SubResource("LabelSettings_o05jy")
+
+[node name="DialogueInteractionZone" parent="." instance=ExtResource("7_0jups")]
+position = Vector2(613, 159)
+dialogueText = "*quack* Hey there! I see you want to beat this game. good luck cause it 's not finished *quack*"
+
+[node name="UI" type="Node2D" parent="."]
+script = ExtResource("8_tefaw")
+
+[node name="Button" type="Button" parent="UI"]
+offset_left = 18.0
+offset_top = 33.0
+offset_right = 44.0
+offset_bottom = 44.0
+theme_override_colors/font_color = Color(0.301961, 0.137255, 0.290196, 1)
+theme_override_colors/font_pressed_color = Color(0.301961, 0.137255, 0.290196, 1)
+theme_override_colors/font_hover_color = Color(0.831373, 0.443137, 0.364706, 1)
+theme_override_colors/font_focus_color = Color(0.301961, 0.137255, 0.290196, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.301961, 0.137255, 0.290196, 1)
+theme_override_fonts/font = ExtResource("5_vavq4")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_pgys5")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_pinaw")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_wdbob")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_va8b0")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_8el1a")
+text = "Credits"
+
+[node name="Credits" type="Node2D" parent="UI"]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="UI/Credits"]
+offset_left = 20.0
+offset_top = 14.0
+offset_right = 303.0
+offset_bottom = 163.0
+color = Color(0.301961, 0.137255, 0.290196, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="UI/Credits"]
+offset_left = 23.0
+offset_top = 17.0
+offset_right = 300.0
+offset_bottom = 158.0
+color = Color(0.894118, 0.858824, 0.839216, 1)
+
+[node name="Label" type="Label" parent="UI/Credits"]
+offset_left = 125.0
+offset_top = 25.0
+offset_right = 180.0
+offset_bottom = 44.0
+text = "Credits"
+label_settings = SubResource("LabelSettings_ht5ln")
+
+[node name="Label4" type="Label" parent="UI/Credits"]
+offset_left = 180.0
+offset_top = 51.0
+offset_right = 295.0
+offset_bottom = 70.0
+text = "With the non-help of twitch chat:"
+label_settings = SubResource("LabelSettings_mnf4x")
+
+[node name="Label5" type="Label" parent="UI/Credits"]
+offset_left = 31.0
+offset_top = 53.0
+offset_right = 146.0
+offset_bottom = 72.0
+text = "Sounds and music: AnnCinnamon
+Art & Game Development: niv3k_el_pato
+Inspiration:"
+label_settings = SubResource("LabelSettings_mnf4x")
+
+[node name="Label2" type="Label" parent="UI/Credits"]
+offset_left = 252.0
+offset_top = 69.0
+offset_right = 288.0
+offset_bottom = 127.0
+text = "RuiLlexy
+hellsing2030
+GariCarandai
+ShellDredd
+yeifu_vty
+vm_jorge_
+SaintCaleuche
+dinodev16"
+label_settings = SubResource("LabelSettings_86ejh")
+
+[node name="Label3" type="Label" parent="UI/Credits"]
+offset_left = 200.0
+offset_top = 70.0
+offset_right = 245.0
+offset_bottom = 142.0
+text = "Lam277
+matialindo123 - Mati
+ccsavlad
+dannyworldmx2
+ckmu32
+danirod_
+raupulus
+Napstal
+quesocaliente0
+RuiLlexy"
+label_settings = SubResource("LabelSettings_86ejh")
+
+[node name="Ecay7zsWkAUzm2d" type="Sprite2D" parent="UI/Credits"]
+position = Vector2(71, 111)
+scale = Vector2(0.0545001, 0.0545001)
+texture = ExtResource("8_gpcft")
+
+[node name="Button" type="Button" parent="UI/Credits"]
+offset_left = 146.0
+offset_top = 130.0
+offset_right = 185.0
+offset_bottom = 152.0
+theme_override_colors/font_color = Color(0.301961, 0.137255, 0.290196, 1)
+theme_override_colors/font_pressed_color = Color(0.301961, 0.137255, 0.290196, 1)
+theme_override_colors/font_hover_color = Color(0.831373, 0.443137, 0.364706, 1)
+theme_override_colors/font_focus_color = Color(0.301961, 0.137255, 0.290196, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.301961, 0.137255, 0.290196, 1)
+theme_override_fonts/font = ExtResource("5_vavq4")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_pgys5")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_pinaw")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_wdbob")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_va8b0")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_8el1a")
+text = "Close"
+
+[connection signal="pressed" from="UI/Button" to="UI" method="_on_button_pressed"]
+[connection signal="pressed" from="UI/Credits/Button" to="UI" method="_on_button_pressed"]

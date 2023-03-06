@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://c7ry4wda4b13u"]
+[gd_scene load_steps=73 format=3 uid="uid://c7ry4wda4b13u"]
 
 [ext_resource type="Script" path="res://Entities/Character.gd" id="1_3g8u8"]
 [ext_resource type="Texture2D" uid="uid://bb1sn4bt1i5u0" path="res://Images/Character.png" id="1_igwot"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://bx8lltqp8hwmf" path="res://UI/Key.tscn" id="4_ugpsr"]
 [ext_resource type="Texture2D" uid="uid://b1573w8214eif" path="res://Images/catsprite.png" id="5_hdccl"]
 [ext_resource type="Texture2D" uid="uid://cd4iwjcq3gpn0" path="res://Images/particle_square.png" id="6_djctv"]
+[ext_resource type="Texture2D" uid="uid://co46ryivrqygn" path="res://Images/character-new-small.png" id="6_y58mw"]
+[ext_resource type="AudioStream" uid="uid://cd0rrkgwgfsm6" path="res://Sounds/fx_cat_death_4.wav" id="8_51mao"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wrg7g"]
 emission_shape = 1
@@ -311,11 +313,11 @@ states/Start/position = Vector2(-55.9996, 39.4074)
 states/Walk/node = SubResource("AnimationNodeAnimation_4m0tn")
 states/Walk/position = Vector2(734.666, 276.666)
 states/WallGrab/node = SubResource("AnimationNodeAnimation_pvywx")
-states/WallGrab/position = Vector2(679.556, -49)
+states/WallGrab/position = Vector2(544.889, 75)
 states/WallWalk/node = SubResource("AnimationNodeAnimation_x4pxv")
-states/WallWalk/position = Vector2(373.333, 421.667)
+states/WallWalk/position = Vector2(414, 345.667)
 transitions = ["IDLE", "PreWalk", SubResource("AnimationNodeStateMachineTransition_53h6e"), "PreWalk", "Walk", SubResource("AnimationNodeStateMachineTransition_tbqw1"), "Walk", "IDLE", SubResource("AnimationNodeStateMachineTransition_7tly8"), "IDLE", "WallWalk", SubResource("AnimationNodeStateMachineTransition_smmoq"), "IDLE", "WallGrab", SubResource("AnimationNodeStateMachineTransition_wyawm"), "IDLE", "Fall", SubResource("AnimationNodeStateMachineTransition_itbf7"), "IDLE", "Jump", SubResource("AnimationNodeStateMachineTransition_tlkht"), "Jump", "IDLE", SubResource("AnimationNodeStateMachineTransition_ddhjk"), "Fall", "IDLE", SubResource("AnimationNodeStateMachineTransition_pnjiu"), "WallWalk", "IDLE", SubResource("AnimationNodeStateMachineTransition_feg8v"), "WallGrab", "IDLE", SubResource("AnimationNodeStateMachineTransition_hjy08"), "Fall", "WallGrab", SubResource("AnimationNodeStateMachineTransition_xw612"), "WallGrab", "Fall", SubResource("AnimationNodeStateMachineTransition_pxgyl"), "Jump", "WallGrab", SubResource("AnimationNodeStateMachineTransition_vx0hv"), "WallGrab", "Jump", SubResource("AnimationNodeStateMachineTransition_pucq3"), "WallGrab", "WallWalk", SubResource("AnimationNodeStateMachineTransition_sktq4"), "WallWalk", "WallGrab", SubResource("AnimationNodeStateMachineTransition_e87or")]
-graph_offset = Vector2(-318, -103)
+graph_offset = Vector2(-253, -64)
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_3fcy8"]
 
@@ -467,7 +469,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5xbeq"]
-size = Vector2(32, 24)
+size = Vector2(14, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iuk7m"]
 size = Vector2(27, 28)
@@ -478,9 +480,9 @@ script = ExtResource("1_3g8u8")
 [node name="ParticleContainer" type="Node2D" parent="."]
 
 [node name="Particles" type="GPUParticles2D" parent="ParticleContainer"]
-modulate = Color(0.831373, 0.443137, 0.364706, 1)
+modulate = Color(0.301961, 0.137255, 0.290196, 1)
 texture_filter = 1
-position = Vector2(14, 8)
+position = Vector2(7, -2)
 emitting = false
 amount = 50
 process_material = SubResource("ParticleProcessMaterial_wrg7g")
@@ -527,13 +529,12 @@ libraries = {
 
 [node name="Cat" type="Sprite2D" parent="Sprite"]
 texture_filter = 1
-texture = ExtResource("5_hdccl")
+texture = ExtResource("6_y58mw")
 hframes = 4
 vframes = 6
 frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_5xbeq")
 
 [node name="SfxPlayer" type="AudioStreamPlayer" parent="."]
@@ -547,6 +548,9 @@ bus = &"SFX"
 visible = false
 position = Vector2(-1.5, 0)
 shape = SubResource("RectangleShape2D_iuk7m")
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_51mao")
 
 [connection signal="area_entered" from="CollisionArea" to="." method="_on_collision_area_area_entered"]
 [connection signal="area_exited" from="CollisionArea" to="." method="_on_collision_area_area_exited"]

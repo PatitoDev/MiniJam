@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://dpjw3upsfvwjd"]
 
 [ext_resource type="Script" path="res://Game.gd" id="1_my1t2"]
-[ext_resource type="Texture2D" uid="uid://dqcwklm3pj1hw" path="res://World/images/initalscreen.png" id="2_ckbm6"]
+[ext_resource type="PackedScene" uid="uid://by0pcyw0jt648" path="res://World/Levels/Level2.tscn" id="2_tw6yy"]
+[ext_resource type="PackedScene" uid="uid://bfrhm7r027vta" path="res://World/Levels/Home.tscn" id="2_yiwop"]
 [ext_resource type="PackedScene" uid="uid://cjk20kww6ghw4" path="res://World/Levels/Level1.tscn" id="3_ktyap"]
-[ext_resource type="PackedScene" uid="uid://c7ry4wda4b13u" path="res://Entities/Character.tscn" id="3_pt0dx"]
 [ext_resource type="PackedScene" uid="uid://bksci20xj0h40" path="res://UI/DialogueInteractionZone/DialogueInteractionZone.tscn" id="9_4brfb"]
 [ext_resource type="AudioStream" uid="uid://c0t1n07a3upd7" path="res://Sounds/amb_forest.ogg" id="9_qc151"]
 [ext_resource type="PackedScene" uid="uid://drc7vgdgp4ugk" path="res://World/TransitionNode/TransitionNode.tscn" id="10_nuxxp"]
@@ -30,47 +30,31 @@ anim_speed_max = 3.18
 texture_filter = 1
 script = ExtResource("1_my1t2")
 
-[node name="Initalscreen" type="Sprite2D" parent="."]
-position = Vector2(320, 180)
-texture = ExtResource("2_ckbm6")
+[node name="Level2" parent="." instance=ExtResource("2_tw6yy")]
+position = Vector2(960, 0)
 
 [node name="Level1" parent="." instance=ExtResource("3_ktyap")]
 position = Vector2(640, 0)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="Home" parent="." instance=ExtResource("2_yiwop")]
 
-[node name="Floor" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(305.25, 352)
-shape = SubResource("RectangleShape2D_fd25t")
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-11, 518)
 
 [node name="Wall" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(6, 55)
+position = Vector2(21, -356)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_fd25t")
 
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_qc151")
 
-[node name="Character" parent="." instance=ExtResource("3_pt0dx")]
-position = Vector2(703, 240)
-
 [node name="DialogueInteractionZone" parent="." instance=ExtResource("9_4brfb")]
-position = Vector2(479, 341)
+position = Vector2(691, 276)
 dialogueText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed turpis tincidunt id aliquet risus feugiat in ante metus. Nisl nisi scelerisque eu ultrices. Eget dolor morbi non arcu risus quis. Volutpat diam ut venenatis tellus in metus vulputate eu scelerisque. Ac odio tempor orci dapibus. A scelerisque purus semper eget duis at tellus at. Faucibus et molestie ac feugiat sed. Iaculis nunc sed augue lacus viverra vitae congue eu consequat. Scelerisque in dictum non consectetur a. Maecenas volutpat blandit aliquam etiam."
 
-[node name="TransitionNode" parent="." instance=ExtResource("10_nuxxp")]
-position = Vector2(694, 277)
-
-[node name="TransitionNode4" parent="." instance=ExtResource("10_nuxxp")]
-position = Vector2(1042, 458)
-moveDirection = 3
-
-[node name="TransitionNode5" parent="." instance=ExtResource("10_nuxxp")]
-position = Vector2(580, 37)
-moveDirection = 2
-
 [node name="TransitionNode2" parent="." instance=ExtResource("10_nuxxp")]
-position = Vector2(579, 277)
+position = Vector2(612, 138)
 moveDirection = 0
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]

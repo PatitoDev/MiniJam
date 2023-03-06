@@ -19,23 +19,24 @@ enum STATE {
 	WALL_GRAB,
 }
 
-var MAX_SPEED = 150
+var MAX_SPEED = 85
 var ACCELERATION = 5
 
-var JUMP_FORCE = -500
-var JUMP_RELEASE_FORCE = 300
+var JUMP_FORCE = -125
+var JUMP_RELEASE_FORCE = 125
 
-var FRICTION = 10
-var GRAVITY = 10
-var ADDITIONAL_FALL_GRAVITY = 4
-const WALL_JUMP_BOOST = 250;
+var FRICTION = 20
+var GRAVITY = 5
+var ADDITIONAL_FALL_GRAVITY = 2
+const WALL_JUMP_BOOST = 125;
 
-const JUMP_VELOCITY = -250.0
+const JUMP_VELOCITY = -125.0
 
 @onready var catSprite = $Sprite/Cat;
 @onready var animation = $Sprite/AnimationTree
 @onready var stateMachine = animation["parameters/playback"];
 
+@onready var deathSfx = preload("res://Sounds/fx_cat_death_4.wav");
 @onready var stepSfx = preload("res://Sounds/fx_stone_footsteps.ogg");
 @onready var jumpSfx = preload("res://Sounds/Jump_20.wav");
 @onready var sfxPlayer = $SfxPlayer;
@@ -159,10 +160,10 @@ func _physics_process(delta):
 			stateMachine.travel("WallGrab");
 		elif (verticalDirection > 0):
 			stateMachine.travel("WallWalk");
-			velocity.y = 50;
+			velocity.y = 25;
 		elif (verticalDirection < 0):
 			stateMachine.travel("WallWalk");
-			velocity.y = -50;
+			velocity.y = -25;
 		shouldApplyGravity = false;
 	
 	if (Input.is_action_just_released("grab")):
@@ -175,9 +176,9 @@ func _physics_process(delta):
 		is_on_wall() && !is_on_floor() &&
 		Input.is_action_just_pressed("ui_accept")):
 		stateMachine.travel("Jump");
-		velocity = Vector2(-100, -300);
+		velocity = Vector2(-50, -150);
 		if (isPressingOnWall || isGrabbingWall):
-			velocity -= Vector2(200, 0);
+			velocity -= Vector2(100, 0);
 		
 		if (wallDirection == DIRECTION.RIGHT):
 			velocity.x *= -1;
@@ -191,7 +192,6 @@ func apply_friction():
 	velocity.x = move_toward(velocity.x, 0, FRICTION);
 	
 func apply_acceleration(directionAsInt: int):
-	print(velocity.x);
 	velocity.x = move_toward(velocity.x, MAX_SPEED * directionAsInt, ACCELERATION);
 
 func playSfx(sound: AudioStream):
@@ -204,6 +204,11 @@ func stopSfx():
 	sfxPlayer.stop();
 
 func onInteractionPressed():
+	if (currentInteractionItem is CatJail):
+		if (currentInteractionItem.isTrapped):
+			currentInteractionItem.setIsTrapped(false);
+			$Key.hideKey();
+	
 	if (currentInteractionItem is DialogueInteractionZone &&
 		!UI.isDialogueShowing):
 		$Key.hideKey();
@@ -219,6 +224,9 @@ func onInteractionPressed():
 
 func _on_collision_area_area_entered(area: Area2D):
 	if (area.is_in_group('InteractionZone')):
+		if (area.get_parent() is CatJail):
+			if (!area.get_parent().isTrapped):
+				return;
 		$Key.showKey();
 		currentInteractionItem = area.get_parent();
 
@@ -227,3 +235,6 @@ func _on_collision_area_area_exited(area):
 		$Key.hideKey();
 		currentInteractionItem = null;
 		UI.hideDialogue();
+		
+func death():
+	$DeathSound.play();

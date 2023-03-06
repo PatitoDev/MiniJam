@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://c6qa3wvmsu7uq"]
+
+[ext_resource type="Script" path="res://Entities/CatJail/CatJail.gd" id="1_ulfee"]
+[ext_resource type="Texture2D" uid="uid://bsurtwql5kbl8" path="res://Images/tilesetnew.png" id="2_2mko3"]
+[ext_resource type="AudioStream" uid="uid://by05seo0imc0x" path="res://Sounds/fx_cage_opening.wav" id="3_64pij"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7kca7"]
+size = Vector2(50, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gm5ix"]
+
+[node name="CatJail" type="StaticBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_ulfee")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_2mko3")
+hframes = 12
+vframes = 7
+frame = 8
+
+[node name="InteractionZone" type="Area2D" parent="." groups=["InteractionZone"]]
+position = Vector2(0, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionZone"]
+position = Vector2(0, -24)
+shape = SubResource("RectangleShape2D_7kca7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_gm5ix")
+
+[node name="Sfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_64pij")
+bus = &"SFX"

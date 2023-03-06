@@ -1,5 +1,7 @@
 extends Area2D
 
+class_name Transition
+
 enum DIRECTION {
 	LEFT,
 	RIGHT,
@@ -8,8 +10,9 @@ enum DIRECTION {
 }
 
 @export var moveDirection: DIRECTION = DIRECTION.RIGHT;
+@export var songToPlay = UI.SONGS.FOREST;
 
-const SCREEN_SIZE = Vector2(640, 360);
+const SCREEN_SIZE = Vector2(320, 180);
 
 func _on_body_entered(body: Node2D):
 	if !(body is Character): 
@@ -37,3 +40,4 @@ func _on_body_entered(body: Node2D):
 				targetCameraPosition = Vector2(0, 1);
 				
 	UI.moveCamereTo(Vector2i(targetCameraPosition.x * SCREEN_SIZE.x, targetCameraPosition.y * SCREEN_SIZE.y));
+	UI.setMusic(songToPlay);

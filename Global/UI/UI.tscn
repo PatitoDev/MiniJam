@@ -1,11 +1,19 @@
-[gd_scene load_steps=13 format=3 uid="uid://buq33nmmgemhb"]
+[gd_scene load_steps=16 format=3 uid="uid://buq33nmmgemhb"]
 
 [ext_resource type="Script" path="res://Global/UI/UI.gd" id="1_c51an"]
 [ext_resource type="PackedScene" uid="uid://bx8lltqp8hwmf" path="res://UI/Key.tscn" id="2_hgpa6"]
+[ext_resource type="FontFile" uid="uid://d0kqltdkajq5n" path="res://Fonts/Pixellari.ttf" id="2_iwl5a"]
 [ext_resource type="Texture2D" uid="uid://dycm6inr56wqq" path="res://Images/minifatduck.png" id="3_63hre"]
 [ext_resource type="Texture2D" uid="uid://bkbmphgjene2m" path="res://Images/ducksitting.png" id="4_cuml6"]
 [ext_resource type="AudioStream" uid="uid://csveyhhbrxqhp" path="res://Sounds/fx_dialogue_pop_2.wav" id="5_ebd8w"]
 [ext_resource type="AudioStream" uid="uid://cwel7vp0tvxw0" path="res://Sounds/quack_1.wav" id="6_bf2m5"]
+[ext_resource type="AudioStream" uid="uid://c0t1n07a3upd7" path="res://Sounds/amb_forest.ogg" id="8_ldsry"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_csmmt"]
+font = ExtResource("2_iwl5a")
+font_size = 12
+outline_size = 3
+outline_color = Color(0.301961, 0.137255, 0.290196, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_low3u"]
 content_margin_left = 10.0
@@ -160,7 +168,24 @@ _data = {
 [node name="UI" type="Node2D"]
 script = ExtResource("1_c51an")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -201.0
+offset_top = 8.0
+offset_right = -11.0
+offset_bottom = 34.0
+grow_horizontal = 0
+text = "0/10"
+label_settings = SubResource("LabelSettings_csmmt")
+horizontal_alignment = 2
+
 [node name="Dialogue" type="CanvasLayer" parent="."]
+scale = Vector2(0.5, 0.5)
+transform = Transform2D(0.5, 0, 0, 0.5, 0, 0)
 
 [node name="Dialogue" type="PanelContainer" parent="Dialogue"]
 modulate = Color(1, 1, 1, 0)
@@ -171,7 +196,7 @@ anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 64.5
 offset_top = 22.0
-offset_right = 575.5
+offset_right = 564.5
 offset_bottom = 142.0
 grow_horizontal = 2
 pivot_offset = Vector2(268.75, 70)
@@ -210,6 +235,7 @@ stretch_mode = 4
 [node name="DialogueLabel" type="RichTextLabel" parent="Dialogue/Dialogue/HBoxContainer"]
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_iwl5a")
 scroll_active = false
 
 [node name="DialogueAnimationPlayer" type="AnimationPlayer" parent="."]
@@ -226,4 +252,12 @@ stream = ExtResource("6_bf2m5")
 bus = &"CharacterSFX"
 
 [node name="Camera" type="Camera2D" parent="."]
-position = Vector2(320, 180)
+position = Vector2(160, 90)
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+bus = &"Music"
+
+[node name="Ambience" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_ldsry")
+autoplay = true
+bus = &"Ambience"
